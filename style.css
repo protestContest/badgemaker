@@ -1,0 +1,258 @@
+@font-face {
+  font-family: 'Gotham';
+  src: url('fonts/Gotham-Light.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham Book';
+  src: url('fonts/Gotham-Book.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham Medium';
+  src: url('fonts/Gotham-Medium.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham Thin';
+  src: url('fonts/Gotham-Thin.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body, html, #root { margin: 0; padding: 0; width: 100%; height: 100%; }
+body { font-family: 'Gotham Book'; }
+#root { display: grid; }
+
+.App {
+  display: grid;
+  grid-template-columns: 1fr 310px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+@media(max-width: 768px) {
+  .App {
+    grid-template-columns: 1fr;
+    grid-template-rows: 320px 1fr;
+  }
+}
+
+.Canvas {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-size: 40px 40px;
+  background-color: #444;
+  background-image: radial-gradient(circle, #888 1px, rgba(0, 0, 0, 0) 1px);
+}
+
+.Canvas > svg {
+  width: 50%;
+  height: 50%;
+  font-family: 'Gotham Medium';
+}
+
+@media(max-width: 768px) {
+  .Canvas > svg {
+    width: 90%;
+    height: 90%;
+  }
+}
+
+.ControlPanel {
+  background: #eee;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+@media(max-width: 768px) {
+  .ControlPanel {
+    height: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.SlideControl {
+  display: block;
+  margin-top: 8px;
+}
+
+.SlideControl > .input {
+  display: flex;
+  margin-top: 4px;
+}
+
+.SlideControl > .input > input[type='range'] {
+  flex: 1;
+  margin: 0;
+}
+
+.SlideControl > .input > .value {
+  width: 40px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.TextControl {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.TextControl > .input {
+  margin-left: auto;
+}
+.TextControl > .input > input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 16px;
+  text-align: center;
+  width: 140px;
+  /*background: #e0e0e0;*/
+  padding: 0px;
+  text-transform: uppercase;
+}
+
+.ImageControl {
+  display: block;
+  margin-top: 8px;
+}
+
+.ImageControl > .input {
+  display: flex;
+  margin-top: 4px;
+}
+
+.ImageControl > .input input[type='file'] {
+  max-width: 186px;
+  display: block;
+}
+
+.ImageControl > .input .remove {
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+  display: block;
+  text-decoration: underline;
+}
+
+.ImageControl > .input > .preview {
+  width: 80px;
+  height: 100%;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ToggleControl {
+  display: flex;
+  margin-top: 8px;
+}
+
+.ToggleControl > .input {
+  margin-left: auto;
+}
+
+.ToggleControl > .input > input[type='checkbox'][checked] {
+  background: #444;
+}
+.ToggleControl > .input > input[type='checkbox'] {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border: 1px solid #333;
+  border-radius: 3px;
+  position: relative;
+}
+.ToggleControl > .input > input[type='checkbox'][checked]::after {
+  content: '×';
+  position: absolute;
+  top: -3px;
+  left: 2px;
+  color: white;
+  font-size: 16px;
+}
+.ToggleControl > .input > input[type='checkbox']::active {
+  outline: none;
+}
+
+.ColorControl {
+  display: flex;
+  margin-top: 8px;
+  position: relative;
+}
+
+.ColorControl > .input {
+  margin-left: auto;
+  width: 38px;
+  height: 22px;
+  border-radius: 3px;
+  border: 1px solid #aaa;
+  cursor: pointer;
+}
+
+.ColorControl > .picker {
+  position: absolute;
+  pointer-events: none;
+  top: 26px;
+  right: 0px;
+}
+
+.ColorControl > .picker > .block-picker {
+  pointer-events: initial;
+  z-index: 100;
+}
+
+.fieldset {
+  margin-bottom: 40px;
+}
+
+.legend {
+  text-transform: uppercase;
+  font-size: 13px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-end;
+  font-family: 'Gotham Medium';
+}
+
+.legend > .reset {
+  margin-left: auto;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 10px;
+  font-family: 'Gotham Book';
+}
+
+.DownloadButton {
+  margin-top: auto;
+}
+
+.DownloadButton > button {
+  width: 100%;
+  background-image: none;
+  border: none;
+  background-color: #20C063;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}

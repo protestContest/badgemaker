@@ -72,7 +72,7 @@ class BadgeImage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  position: state.imagePosition
+  position: state.badge.imagePosition
 });
 
 const mapDispatchToProps = (dispatch) => ({

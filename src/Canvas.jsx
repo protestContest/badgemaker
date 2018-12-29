@@ -81,7 +81,7 @@ class Canvas extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state
+  ...state.badge
 });
 
 export default connect(mapStateToProps)(Canvas);

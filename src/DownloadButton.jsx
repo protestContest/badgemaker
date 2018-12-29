@@ -55,7 +55,7 @@ export default class DownloadButton extends React.Component {
   render() {
     return (
       <div className='DownloadButton'>
-        <button onClick={this.save}>{this.props.children}</button>
+        <button className='big-button' onClick={this.save}>{this.props.children}</button>
       </div>
     );
   }

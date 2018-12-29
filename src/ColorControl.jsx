@@ -21,7 +21,6 @@ class ColorControl extends React.Component {
       event.target.value = color.hex;
     }
 
-    // this.props.close();
     this.props.onChange(event);
   }
 
@@ -60,7 +59,7 @@ class ColorControl extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
   isOpen: state.ui.openPicker === ownProps.id,
-  customColors: state.customColors
+  customColors: state.badge.customColors
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

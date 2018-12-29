@@ -37,6 +37,9 @@ body { font-family: 'Gotham Book'; }
 .App {
   display: grid;
   grid-template-columns: 1fr 310px;
+  grid-template-rows: 1fr 100px;
+  grid-template-areas: 'main  panel'
+                       'saves panel';
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -50,6 +53,9 @@ body { font-family: 'Gotham Book'; }
 }
 
 .Canvas {
+  grid-row: 1/3;
+  grid-column: 1;
+
   display: grid;
   justify-items: center;
   align-items: center;
@@ -72,12 +78,26 @@ body { font-family: 'Gotham Book'; }
 }
 
 .ControlPanel {
+  grid-area: panel;
   background: #eee;
   padding: 20px;
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow-y: auto;
+}
+
+.ControlPanel > .actions {
+  margin-top: auto;
+  display: flex;
+}
+
+.ControlPanel > .actions > * {
+  flex: 1;
+  margin-right: 8px;
+}
+.ControlPanel > .actions > *::last-child {
+  margin-right: 0px;
 }
 
 @media(max-width: 768px) {
@@ -246,15 +266,18 @@ body { font-family: 'Gotham Book'; }
   font-family: 'Gotham Book';
 }
 
-.DownloadButton {
-  margin-top: auto;
+.SaveButton > .big-button {
+  background-color: #0074E4;
 }
 
-.DownloadButton > button {
+.DownloadButton > .big-button {
+  background-color: #20C063;
+}
+
+.big-button {
   width: 100%;
   background-image: none;
   border: none;
-  background-color: #20C063;
   color: white;
   padding: 10px 20px;
   font-size: 16px;
@@ -288,4 +311,40 @@ body { font-family: 'Gotham Book'; }
 }
 .BadgeImage.-dragging {
   cursor: grabbing;
+}
+
+.SaveList {
+  grid-area: saves;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.SaveTile {
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  background: #444;
+  width: 68px;
+  height: 68px;
+  margin-right: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.SaveTile > .delete {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  color: white;
+  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  text-align: center;
+  background: #aaa;
+  display: none;
+}
+
+.SaveTile:hover > .delete {
+  display: block;
 }

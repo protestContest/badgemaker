@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setState, reset, closePicker } from './actions';
+import { setBadgeProps, reset } from './actions';
 import If from './If';
 import SlideControl from './SlideControl';
 import TextControl from './TextControl';
@@ -8,6 +8,7 @@ import ToggleControl from './ToggleControl';
 import ImageControl from './ImageControl';
 import ColorControl from './ColorControl';
 import DownloadButton from './DownloadButton';
+import SaveButton from './SaveButton';
 
 class ControlPanel extends React.Component {
   constructor(props) {
@@ -54,53 +55,53 @@ class ControlPanel extends React.Component {
   }
 
   render() {
-    const generalReset = (this.props.state.isReset)
+    const generalReset = (this.props.isReset)
       ? null
       : <div className='reset' onClick={this.reset}>Reset</div>;
 
-    const imageReset = (this.props.state.image)
+    const imageReset = (this.props.badge.image)
       ? <a className='reset' onClick={this.removeImage}>Remove</a>
       : null;
 
     return (
-      <div className="ControlPanel" onClick={this.props.closePicker}>
+      <div className="ControlPanel">
         {/*
-        <SlideControl title='Badge Radius' value={this.props.state.badgeRadius} min='0' max='500' onChange={this.setProp('badgeRadius')} />
-        <SlideControl title='Petal Radius' value={this.props.state.petalRadius} min='0' max='50' onChange={this.setProp('petalRadius')} />
-        <SlideControl title='Petal Depth' value={parseFloat(this.props.state.petalDepth).toFixed(2)} min='0' max={Math.PI} step="0.01" onChange={this.setProp('petalDepth')} />
-        <SlideControl title='Petal Offset' value={this.props.state.petalOffset} min={-this.props.state.petalRadius} max={this.props.state.petalRadius} onChange={this.setProp('petalOffset')} />
+        <SlideControl title='Badge Radius' value={this.props.badge.badgeRadius} min='0' max='500' onChange={this.setProp('badgeRadius')} />
+        <SlideControl title='Petal Radius' value={this.props.badge.petalRadius} min='0' max='50' onChange={this.setProp('petalRadius')} />
+        <SlideControl title='Petal Depth' value={parseFloat(this.props.badge.petalDepth).toFixed(2)} min='0' max={Math.PI} step="0.01" onChange={this.setProp('petalDepth')} />
+        <SlideControl title='Petal Offset' value={this.props.badge.petalOffset} min={-this.props.badge.petalRadius} max={this.props.badge.petalRadius} onChange={this.setProp('petalOffset')} />
         */}
         <div className='fieldset'>
           <div className='legend'>
             General
             {generalReset}
           </div>
-          <ToggleControl title='Petal border' value={this.props.state.usePetals} onChange={this.setProp('usePetals')} />
-          <ColorControl id='fillColor' title='Background Color' value={this.props.state.fillColor} onChange={this.setProp('fillColor')} />
-          <ColorControl id='borderColor' title='Border Color' value={this.props.state.borderColor} onChange={this.setProp('borderColor')} />
+          <ToggleControl title='Petal border' value={this.props.badge.usePetals} onChange={this.setProp('usePetals')} />
+          <ColorControl id='fillColor' title='Background Color' value={this.props.badge.fillColor} onChange={this.setProp('fillColor')} />
+          <ColorControl id='borderColor' title='Border Color' value={this.props.badge.borderColor} onChange={this.setProp('borderColor')} />
         </div>
         <div className='fieldset'>
           <div className='legend'>
             Title Ring
             <div className='reset'>
-              <ToggleControl title='' value={this.props.state.useTitleRing} onChange={this.setProp('useTitleRing')} />
+              <ToggleControl title='' value={this.props.badge.useTitleRing} onChange={this.setProp('useTitleRing')} />
             </div>
           </div>
-          <If true={this.props.state.useTitleRing}>
-            <TextControl title='Title Text' value={this.props.state.titleText} onChange={this.setProp('titleText')} />
-            <ColorControl id='titleColor' title='Title Color' value={this.props.state.titleColor} onChange={this.setProp('titleColor')} />
+          <If true={this.props.badge.useTitleRing}>
+            <TextControl title='Title Text' value={this.props.badge.titleText} onChange={this.setProp('titleText')} />
+            <ColorControl id='titleColor' title='Title Color' value={this.props.badge.titleColor} onChange={this.setProp('titleColor')} />
           </If>
         </div>
         <div className='fieldset'>
           <div className='legend'>
             Banner
             <div className='reset'>
-              <ToggleControl title='' value={this.props.state.useBanner} onChange={this.setProp('useBanner')} />
+              <ToggleControl title='' value={this.props.badge.useBanner} onChange={this.setProp('useBanner')} />
             </div>
           </div>
-          <If true={this.props.state.useBanner}>
-            <TextControl title='Banner Text' value={this.props.state.bannerText} onChange={this.setProp('bannerText')} />
-            <ColorControl id='bannerColor' title='Banner Color' value={this.props.state.bannerColor} onChange={this.setProp('bannerColor')} />
+          <If true={this.props.badge.useBanner}>
+            <TextControl title='Banner Text' value={this.props.badge.bannerText} onChange={this.setProp('bannerText')} />
+            <ColorControl id='bannerColor' title='Banner Color' value={this.props.badge.bannerColor} onChange={this.setProp('bannerColor')} />
           </If>
         </div>
         <div className='fieldset'>
@@ -108,26 +109,29 @@ class ControlPanel extends React.Component {
             Image
             {imageReset}
           </div>
-          <If true={this.props.state.image}>
-            <SlideControl title='Image Size' value={this.props.state.imageSize} min='0' max='300' showValue={false} onChange={this.setProp('imageSize')} />
+          <If true={this.props.badge.image}>
+            <SlideControl title='Image Size' value={this.props.badge.imageSize} min='0' max='300' showValue={false} onChange={this.setProp('imageSize')} />
           </If>
-          <ImageControl title='Image File' value={this.props.state.image} onChange={this.onImageChange} />
+          <ImageControl title='Image File' value={this.props.badge.image} onChange={this.onImageChange} />
         </div>
 
-        <DownloadButton title={this.props.state.titleText} size='500'>Download</DownloadButton>
+        <div className='actions'>
+          <SaveButton>Save</SaveButton>
+          <DownloadButton title={this.props.badge.titleText} size='500'>Download</DownloadButton>
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  state
+  isReset: state.isReset,
+  badge: state.badge
 });
 
 const mapDispatchToProps = dispatch => ({
-  set: item => dispatch(setState(item)),
-  reset: () => dispatch(reset()),
-  closePicker: () => dispatch(closePicker())
+  set: item => dispatch(setBadgeProps(item)),
+  reset: () => dispatch(reset())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ControlPanel);

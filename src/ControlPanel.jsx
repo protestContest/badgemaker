@@ -38,7 +38,8 @@ class ControlPanel extends React.Component {
       reader.onload = e => {
         that.props.set({
           image: e.target.result,
-          imagePosition: { x: 0, y: 0 }
+          imagePosition: { x: 0, y: 0 },
+          imageSize: 100
         });
       };
 
@@ -49,7 +50,8 @@ class ControlPanel extends React.Component {
   removeImage(event) {
     this.props.set({
       image: null,
-      imagePosition: { x: 0, y: 0 }
+      imagePosition: { x: 0, y: 0 },
+      imageSize: 100
     });
     event.preventDefault();
   }

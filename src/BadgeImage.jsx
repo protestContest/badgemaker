@@ -9,16 +9,20 @@ class BadgeImage extends React.Component {
     this.state = { dragging: false };
     this.onDragStart = this.onDragStart.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
+    this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
   }
 
   onDragStart(event) {
-    this.setState({ dragging: true });
     event.preventDefault();
   }
 
   onDragEnd(event) {
     this.setState({ dragging: false });
+  }
+
+  onMouseDown(event) {
+    this.setState({ dragging: true });
   }
 
   onMouseMove(event) {
@@ -54,6 +58,7 @@ class BadgeImage extends React.Component {
             onDragStart={this.onDragStart}
             onMouseOut={this.onDragEnd}
             onMouseUp={this.onDragEnd}
+            onMouseDown={this.onMouseDown}
             onMouseMove={this.onMouseMove}
             x={this.props.badgeCircle.cx - 0.5*this.props.size + this.props.position.x}
             y={this.props.badgeCircle.cy - badgeOffset - 0.5*this.props.size + this.props.position.y}

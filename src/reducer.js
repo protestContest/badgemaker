@@ -26,6 +26,8 @@ const defaultState = {
   imageSize: 100,
   imagePosition: { x: 0, y: 0 },
 
+  customColors: [],
+
   ui: {
     openPicker: null
   }

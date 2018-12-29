@@ -6,7 +6,7 @@ import { BlockPicker } from 'react-color';
 class ColorControl extends React.Component {
   constructor(props) {
     super(props);
-    this.colors = [
+    this.defaultColors = [
       '#19345d', '#20c063', '#0074e4', '#f0312d', '#efae5e',
       '#62c3d6', '#47c7b5', '#999999', '#333333', '#dddddd'
     ];
@@ -31,8 +31,10 @@ class ColorControl extends React.Component {
   render() {
     const { title, value, onChange, ...restProps } = this.props;
 
+    const colors = [...this.defaultColors, ...this.props.customColors];
+
     const picker = (this.props.isOpen)
-      ? <div className='picker'><BlockPicker color={this.props.value} colors={this.colors} onChange={this.onChange} triangle='hide' /></div>
+      ? <div className='picker'><BlockPicker color={this.props.value} colors={colors} onChange={this.onChange} triangle='hide' /></div>
       : null;
 
     return (
@@ -45,9 +47,10 @@ class ColorControl extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return { isOpen: state.ui.openPicker === ownProps.id };
-};
+const mapStateToProps = (state, ownProps) => ({
+  isOpen: state.ui.openPicker === ownProps.id,
+  customColors: state.customColors
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   open: () => dispatch(openPicker(ownProps.id)),

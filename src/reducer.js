@@ -41,6 +41,7 @@ const defaultState = {
 // const saveFields = ['badgeRadius','petalRadius','numPetals','petalDepth','petalOffset','width','height','borderColor','fillColor','usePetals','useTitleRing','titleColor','titleWidth','titleText','useBanner','bannerColor','bannerText','image','imageSize','imagePosition','customColors'];
 
 export default (state = defaultState, action) => {
+  let newBadgeData = {};
   switch(action.type) {
     case 'SET_PROPS':
       for (let prop in action.payload) {
@@ -49,16 +50,17 @@ export default (state = defaultState, action) => {
         }
       }
 
+      newBadgeData = {
+        ...state.badge,
+        ...action.payload
+      };
+
       return {
         ...state,
-        badge: {
-          ...state.badge,
-          ...action.payload
-        },
-        isReset: false,
-        canSave: true
+        badge: newBadgeData,
+        isReset: !badgeIsDefault(newBadgeData),
+        canSave: !badgeIsSaved(newBadgeData, state.saves)
       };
-      break;
 
     case 'OPEN_PICKER':
       return {
@@ -68,7 +70,6 @@ export default (state = defaultState, action) => {
           openPicker: action.payload
         }
       };
-      break;
 
     case 'CLOSE_PICKER':
       return {
@@ -78,52 +79,75 @@ export default (state = defaultState, action) => {
           openPicker: null
         }
       };
-      break;
 
     case 'ADJUST_IMAGE':
+      newBadgeData = {
+        ...state.badge,
+        imagePosition: action.payload
+      };
+
       return {
         ...state,
-        badge: {
-          ...state.badge,
-          imagePosition: action.payload
-        }
+        badge: newBadgeData,
+        canSave: !badgeIsSaved(newBadgeData, state.saves)
       };
-      break;
 
     case 'RESET':
       return {
         ...state,
-        badge: defaultState.badge
+        badge: defaultState.badge,
+        isReset: true,
+        canSave: false
       };
-      break;
 
     case 'ADD_SAVE':
       if (!state.canSave)
         return state;
+
       return {
         ...state,
-        saves: [...state.saves, action.payload],
+        saves: [action.payload, ...state.saves],
         canSave: false
       };
-      break;
 
     case 'RESTORE_SAVE':
       return {
         ...state,
         badge: action.payload,
+        isReset: false,
         canSave: false
       };
-      break;
 
     case 'DELETE_SAVE':
       const saves = state.saves.filter(save => save !== action.payload);
       return {
         ...state,
-        saves
+        saves,
+        canSave: !badgeIsSaved(state.badge, saves)
       };
-      break;
 
     default:
       return state;
   }
 };
+
+function badgeIsSaved(badgeData, saves) {
+  let badgeIsSaved = saves.some(save => {
+    return badgeDataMatches(badgeData, save.data);
+  });
+
+  return badgeIsSaved;
+}
+
+function badgeIsDefault(badgeData) {
+  return badgeDataMatches(badgeData, defaultState.badge);
+}
+
+function badgeDataMatches(badgeA, badgeB) {
+  for (let prop in badgeA) {
+    if (badgeA[prop] !== badgeB[prop]) {
+      return false;
+    }
+  }
+  return true;
+}

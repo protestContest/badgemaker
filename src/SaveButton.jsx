@@ -31,9 +31,10 @@ class SaveButton extends React.Component {
   render() {
     const className = (this.props.canSave) ? 'SaveButton' : 'SaveButton -disabled';
     return (
-      <div className={className}>
-        <button className='big-button' onClick={this.save}>{this.props.children}</button>
-      </div>
+        <button className={className} onClick={this.save}>
+          <div className='icon'>+</div>
+          <div className='label'>Save</div>
+        </button>
     );
   }
 }

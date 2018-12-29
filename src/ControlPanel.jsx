@@ -116,7 +116,6 @@ class ControlPanel extends React.Component {
         </div>
 
         <div className='actions'>
-          <SaveButton>Save</SaveButton>
           <DownloadButton title={this.props.badge.titleText} size='500'>Download</DownloadButton>
         </div>
       </div>

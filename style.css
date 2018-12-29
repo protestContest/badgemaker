@@ -266,14 +266,6 @@ body { font-family: 'Gotham Book'; }
   font-family: 'Gotham Book';
 }
 
-.SaveButton > .big-button {
-  background-color: #0074E4;
-}
-.SaveButton.-disabled > .big-button {
-  background-color: #aaa;
-  color: #ddd;
-}
-
 .DownloadButton > .big-button {
   background-color: #20C063;
 }
@@ -336,6 +328,10 @@ body { font-family: 'Gotham Book'; }
   position: relative;
 }
 
+.SaveTile:hover {
+  border-color: #ddd;
+}
+
 .SaveTile > .delete {
   position: absolute;
   top: -8px;
@@ -352,4 +348,47 @@ body { font-family: 'Gotham Book'; }
 
 .SaveTile:hover > .delete {
   display: block;
+}
+
+.SaveButton {
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  background: #444;
+  width: 68px;
+  height: 68px;
+  margin-right: 20px;
+  cursor: pointer;
+  color: #aaa;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.SaveButton:hover {
+  border-color: #ddd;
+  color: #ddd;
+}
+
+.SaveButton > .icon {
+  font-size: 40px;
+  height: 44px;
+  position: relative;
+  top: 7px;
+  transition: top 70ms ease;
+}
+
+.SaveButton > .label {
+  text-transform: uppercase;
+  height: 14px;
+  opacity: 0;
+  transition: opacity 85ms ease;
+  transition-delay: 0ms;
+}
+
+.SaveButton:hover > .icon {
+  top: 0px;
+}
+
+.SaveButton:hover > .label {
+  opacity: 1;
 }

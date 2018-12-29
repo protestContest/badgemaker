@@ -13,13 +13,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const stateStr = localStorage.getItem('state');
   const initialState = (stateStr) ? JSON.parse(stateStr) : undefined;
 
-  const store = createStore(reducer, initialState, applyMiddleware(persistState));
+  try {
+    const store = createStore(reducer, initialState, applyMiddleware(persistState));
 
-  ReactDOM.render((
-    <Provider store={store}>
-      <App/>
-    </Provider>
-  ), rootEl);
+    ReactDOM.render((
+      <Provider store={store}>
+        <App/>
+      </Provider>
+    ), rootEl);
+  } catch (err) {
+    // if the store format has changed, try again with the default store
+
+    const store = createStore(reducer, undefined, applyMiddleware(persistState));
+
+    ReactDOM.render((
+      <Provider store={store}>
+        <App/>
+      </Provider>
+    ), rootEl);
+  }
 });
 
 function persistState({ getState }) {

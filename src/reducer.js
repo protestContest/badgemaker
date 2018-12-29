@@ -39,8 +39,6 @@ const defaultState = {
   saves: []
 };
 
-// const saveFields = ['badgeRadius','petalRadius','numPetals','petalDepth','petalOffset','width','height','borderColor','fillColor','usePetals','useTitleRing','titleColor','titleWidth','titleText','useBanner','bannerColor','bannerText','image','imageSize','imagePosition','customColors'];
-
 export default (state = defaultState, action) => {
   let newBadgeData = {};
   switch(action.type) {

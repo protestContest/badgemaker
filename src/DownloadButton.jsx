@@ -14,7 +14,13 @@ export default class DownloadButton extends React.Component {
       cancelable: true
     });
 
-    let title = 'badge-' + this.props.title.toLowerCase().replace(' ', '-') + '.png';
+    let title = 'badge-' + Date.now() + '.png';
+    if (this.props.badge.useTitle) {
+      title = 'badge-' + this.props.badge.titleText.toLowerCase().replace(/[^0-9a-zA-Z]+/g, '-') + '.png';
+    } else if (this.props.badge.useBanner) {
+      title = 'badge-' + this.props.badge.bannerText.toLowerCase().replace(/[^0-9a-zA-Z]+/g, '-') + '.png';
+    }
+
 
     let a = document.createElement('a');
     a.setAttribute('download', title);

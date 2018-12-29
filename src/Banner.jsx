@@ -26,12 +26,12 @@ export default class Banner extends React.Component {
   }
 
   textArc(r) {
-    let d = this.describeArc(this.props.badgeCircle.cx, this.props.badgeCircle.cy + 4.6*r, r*4, -Math.PI/2, this.props.bannerWidth*Math.PI, 1).join(' ');
+    let d = this.describeArc(this.props.badgeCircle.cx, this.props.badgeCircle.cy + 4.7*r, r*4, -Math.PI/2, this.props.bannerWidth*Math.PI, 1).join(' ');
     return <path id='bannerArc' fill='none' stroke='none' d={d} />;
   }
 
   bannerArc(r) {
-    let d = this.describeArc(this.props.badgeCircle.cx, this.props.badgeCircle.cy + 4.5*r, r*4, -Math.PI/2, this.props.bannerWidth*Math.PI, 1).join(' ');
+    let d = this.describeArc(this.props.badgeCircle.cx, this.props.badgeCircle.cy + 4.6*r, r*4, -Math.PI/2, this.props.bannerWidth*Math.PI, 1).join(' ');
     return <path fill='none' stroke={this.props.bgColor} strokeWidth={40} d={d} />;
   }
 

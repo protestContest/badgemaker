@@ -258,6 +258,8 @@ body { font-family: 'Gotham Book'; }
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-family: 'Gotham Medium';
 }
 
 .feedback {

@@ -79,7 +79,7 @@ export default class TitleRing extends React.Component {
   }
 
   render() {
-    let r = this.props.badgeCircle.r - this.props.width/2;
+    let r = this.props.badgeCircle.r - this.props.width/3;
     let textArc = this.textArc(r);
     let bgArc = this.bgArc(r);
     let lowerArc = this.lowerArc(r);
@@ -89,7 +89,7 @@ export default class TitleRing extends React.Component {
       </text>
     );
 
-    let star = <Star cx={this.props.badgeCircle.cx} cy={this.props.badgeCircle.cy + r} size={5} color={this.props.textColor} />;
+    let star = <Star cx={this.props.badgeCircle.cx} cy={this.props.badgeCircle.cy + r} size={6} color={this.props.textColor} />;
 
     return (
       <g>

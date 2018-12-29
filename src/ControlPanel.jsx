@@ -120,7 +120,7 @@ class ControlPanel extends React.Component {
           <ImageControl title='Image File' value={this.props.state.image} onChange={this.fileInput} />
         </div>
 
-        <DownloadButton title={this.props.state.titleText} size='500'>Save Badge</DownloadButton>
+        <DownloadButton title={this.props.state.titleText} size='500'>Download</DownloadButton>
       </div>
     );
   }

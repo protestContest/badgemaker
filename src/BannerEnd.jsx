@@ -40,7 +40,7 @@ export default class BannerEnd extends React.Component {
   }
 
   bannerEnd(r, side) {
-    let offset = 4.5*r;
+    let offset = 4.6*r;
     let arcPosition = (side === 'left') ? -0.60 : -0.4;
     let arcLength =  0.07;
     let arcRadius = r*4;
@@ -63,8 +63,8 @@ export default class BannerEnd extends React.Component {
       : this.endArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + offset, insetPointRadius, insetPointPosition*Math.PI, arcLength*Math.PI);
 
     let bannerCorner = (side === 'left')
-      ? this.startArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + 4.6*r, arcRadius-12, -Math.PI/2, this.props.bannerWidth*Math.PI)
-      : this.endArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + 4.6*r, arcRadius-12, -Math.PI/2, this.props.bannerWidth*Math.PI);
+      ? this.startArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + 4.7*r, arcRadius-12, -Math.PI/2, this.props.bannerWidth*Math.PI)
+      : this.endArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + 4.7*r, arcRadius-12, -Math.PI/2, this.props.bannerWidth*Math.PI);
 
     let d = (side === 'left')
       ? [

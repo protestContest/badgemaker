@@ -18,6 +18,7 @@ class Canvas extends React.Component {
     };
 
     let border = null;
+    let background = null;
     if (this.props.usePetals) {
       border = <PetalBorder
           badgeCircle={badgeCircle}
@@ -26,9 +27,18 @@ class Canvas extends React.Component {
           petalDepth={this.props.petalDepth}
           petalRadius={this.props.petalRadius}
           borderColor={this.props.borderColor}
+          fillColor='none' />;
+      background = <PetalBorder
+          badgeCircle={badgeCircle}
+          numPetals={this.props.numPetals}
+          petalOffset={this.props.petalOffset}
+          petalDepth={this.props.petalDepth}
+          petalRadius={this.props.petalRadius}
+          borderColor='none'
           fillColor={this.props.fillColor} />;
     } else {
-      border = <circle cx={badgeCircle.cx} cy={badgeCircle.cy} r={badgeCircle.r + 20} fill={this.props.fillColor} stroke={this.props.borderColor} strokeWidth='3' />
+      border = <circle cx={badgeCircle.cx} cy={badgeCircle.cy} r={badgeCircle.r + 20} fill='none' stroke={this.props.borderColor} strokeWidth='3' />
+      background = <circle cx={badgeCircle.cx} cy={badgeCircle.cy} r={badgeCircle.r + 20} fill={this.props.fillColor} stroke='none' strokeWidth='3' />
     }
 
     let image = (this.props.image)
@@ -58,8 +68,9 @@ class Canvas extends React.Component {
 
           {bannerEnds}
           <circle cx={center.x} cy={center.y} r={this.props.badgeRadius} fill="none" stroke="#ddd" strokeWidth="1" />
-          {border}
+          {background}
           {image}
+          {border}
           {title}
           {banner}
 

@@ -1,15 +1,10 @@
 import React from 'react';
 import {Point, polar2cart} from './2d';
 
-export default class BannerEnd {
-  constructor(text, badgeCircle, width, bgColor, textColor) {
-    this.badgeCircle = badgeCircle;
-    this.width = width;
-    this.text = text;
-    this.bgColor = bgColor;
-    this.textColor = textColor;
-    this.bannerWidth = 0.215;
-  }
+export default class BannerEnd extends React.Component {
+  static defaultProps = {
+    bannerWidth: 0.215
+  };
 
   startArcPoint(cx, cy, radius, centerAngle, spreadAngle) {
     let endAngle = centerAngle - 0.5*spreadAngle;
@@ -50,13 +45,13 @@ export default class BannerEnd {
     let arcLength =  0.07;
     let arcRadius = r*4;
 
-    let topArc = this.describeArc(this.badgeCircle.cx, this.badgeCircle.cy + offset, arcRadius, arcPosition*Math.PI, arcLength*Math.PI, 1);
-    let topArcStart = this.startArcPoint(this.badgeCircle.cx, this.badgeCircle.cy + offset, arcRadius, arcPosition*Math.PI, arcLength*Math.PI);
-    let topArcEnd = this.endArcPoint(this.badgeCircle.cx, this.badgeCircle.cy + offset, arcRadius, arcPosition*Math.PI, arcLength*Math.PI);
+    let topArc = this.describeArc(this.props.badgeCircle.cx, this.props.badgeCircle.cy + offset, arcRadius, arcPosition*Math.PI, arcLength*Math.PI, 1);
+    let topArcStart = this.startArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + offset, arcRadius, arcPosition*Math.PI, arcLength*Math.PI);
+    let topArcEnd = this.endArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + offset, arcRadius, arcPosition*Math.PI, arcLength*Math.PI);
 
     let bottomArcRadius = arcRadius - 40;
-    let bottomArcStart = this.startArcPoint(this.badgeCircle.cx, this.badgeCircle.cy + offset, bottomArcRadius, arcPosition*Math.PI, arcLength*Math.PI);
-    let bottomArcEnd = this.endArcPoint(this.badgeCircle.cx, this.badgeCircle.cy + offset, bottomArcRadius, arcPosition*Math.PI, arcLength*Math.PI);
+    let bottomArcStart = this.startArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + offset, bottomArcRadius, arcPosition*Math.PI, arcLength*Math.PI);
+    let bottomArcEnd = this.endArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + offset, bottomArcRadius, arcPosition*Math.PI, arcLength*Math.PI);
     let bottomArc = [
       'A', bottomArcRadius, bottomArcRadius, 0, '0', 0, bottomArcStart.x, bottomArcStart.y
     ];
@@ -64,12 +59,12 @@ export default class BannerEnd {
     let insetPointRadius = arcRadius - 20;
     let insetPointPosition = (side === 'left') ? arcPosition + 0.02 : arcPosition - 0.02;
     let insetPoint = (side === 'left')
-      ? this.startArcPoint(this.badgeCircle.cx, this.badgeCircle.cy + offset, insetPointRadius, insetPointPosition*Math.PI, arcLength*Math.PI)
-      : this.endArcPoint(this.badgeCircle.cx, this.badgeCircle.cy + offset, insetPointRadius, insetPointPosition*Math.PI, arcLength*Math.PI);
+      ? this.startArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + offset, insetPointRadius, insetPointPosition*Math.PI, arcLength*Math.PI)
+      : this.endArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + offset, insetPointRadius, insetPointPosition*Math.PI, arcLength*Math.PI);
 
     let bannerCorner = (side === 'left')
-      ? this.startArcPoint(this.badgeCircle.cx, this.badgeCircle.cy + 4.6*r, arcRadius-12, -Math.PI/2, this.bannerWidth*Math.PI)
-      : this.endArcPoint(this.badgeCircle.cx, this.badgeCircle.cy + 4.6*r, arcRadius-12, -Math.PI/2, this.bannerWidth*Math.PI);
+      ? this.startArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + 4.6*r, arcRadius-12, -Math.PI/2, this.props.bannerWidth*Math.PI)
+      : this.endArcPoint(this.props.badgeCircle.cx, this.props.badgeCircle.cy + 4.6*r, arcRadius-12, -Math.PI/2, this.props.bannerWidth*Math.PI);
 
     let d = (side === 'left')
       ? [
@@ -101,8 +96,8 @@ export default class BannerEnd {
         'Z'
       ].join(' ');
 
-    let endColor = this.getTintedColor(this.bgColor, -10);
-    let shadowColor = this.getTintedColor(this.bgColor, -30);
+    let endColor = this.getTintedColor(this.props.bgColor, -10);
+    let shadowColor = this.getTintedColor(this.props.bgColor, -30);
 
     return (
       <g>
@@ -128,8 +123,8 @@ export default class BannerEnd {
       return "#" + r + g + b;
   }
 
-  path() {
-    let r = this.badgeCircle.r - this.width/2;
+  render() {
+    let r = this.props.badgeCircle.r - this.props.width/2;
     let leftEnd = this.bannerEnd(r, 'left');
     let rightEnd = this.bannerEnd(r, 'right');
 

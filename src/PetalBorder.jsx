@@ -6,7 +6,6 @@ export default class PetalBorder extends React.Component {
     super(props);
 
     this.state = {
-      color: { border: props.borderColor, fill: props.fillColor },
       arcs: [],
       circs: []
     };
@@ -64,6 +63,6 @@ export default class PetalBorder extends React.Component {
     moves.push('Z');
     let d = moves.join(" ");
 
-    return <path stroke={this.state.color.border} fill={this.state.color.fill} fillRule='evenodd' strokeWidth='3' d={d} />;
+    return <path stroke={this.props.borderColor} fill={this.props.fillColor} fillRule='evenodd' strokeWidth='3' d={d} />;
   }
 }

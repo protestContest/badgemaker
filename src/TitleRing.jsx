@@ -89,7 +89,7 @@ export default class TitleRing extends React.Component {
       </text>
     );
 
-    let star = new Star(this.props.badgeCircle.cx, this.props.badgeCircle.cy + r, 5, this.props.textColor).path();
+    let star = <Star cx={this.props.badgeCircle.cx} cy={this.props.badgeCircle.cy + r} size={5} color={this.props.textColor} />;
 
     return (
       <g>

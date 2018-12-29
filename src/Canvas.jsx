@@ -40,11 +40,11 @@ class Canvas extends React.Component {
       : null;
 
     let banner = (this.props.useBanner)
-      ? new Banner(this.props.bannerText, badgeCircle, this.props.titleWidth, this.props.bannerColor, 'white').path()
+      ? <Banner text={this.props.bannerText} badgeCircle={badgeCircle} width={this.props.titleWidth} bgColor={this.props.bannerColor} textColor='white' />
       : null;
 
     let bannerEnds = (this.props.useBanner)
-      ? new BannerEnd(this.props.bannerText, badgeCircle, this.props.titleWidth, this.props.bannerColor, 'white').path()
+      ? <BannerEnd badgeCircle={badgeCircle} width={this.props.titleWidth} bgColor={this.props.bannerColor} />
       : null;
 
     return (

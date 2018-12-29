@@ -1,14 +1,7 @@
 import React from 'react';
 import {Point, polar2cart} from './2d';
 
-export default class Star {
-  constructor(cx, cy, size, color) {
-    this.cx = cx;
-    this.cy = cy;
-    this.size = size;
-    this.color = color;
-  }
-
+export default class Star extends React.Component {
   startArcPoint(cx, cy, radius, centerAngle, spreadAngle) {
     let endAngle = centerAngle - 0.5*spreadAngle;
     let start = new Point(polar2cart({ r: radius, θ: endAngle }))
@@ -43,22 +36,22 @@ export default class Star {
     return d;
   }
 
-  path() {
+  render() {
     let numArms = 5;
-    let outerRadius = this.size;
-    let innerRadius = this.size / 2;
+    let outerRadius = this.props.size;
+    let innerRadius = this.props.size / 2;
     let angle = Math.PI / numArms;
     let coords = [];
 
     for (let i = 0; i < 2*numArms; i++) {
       let r = (i % 2 === 0) ? outerRadius : innerRadius;
       let p = new Point(polar2cart({ r, θ: i*angle }))
-        .rotate(-0.5*angle).translate(this.cx, this.cy).transform();
+        .rotate(-0.5*angle).translate(this.props.cx, this.props.cy).transform();
       coords = [...coords, p.x, p.y];
     }
 
     let points = coords.join(',');
 
-    return <polygon points={points} stroke='none' fill={this.color} />
+    return <polygon points={points} stroke='none' fill={this.props.color} />
   }
 }

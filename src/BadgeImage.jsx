@@ -4,6 +4,9 @@ import {Point, polar2cart} from './2d';
 export default class BadgeImage extends React.Component {
   render() {
     let badgeOffset = (this.props.useBanner) ? 20 : 0;
+    if (this.props.useBanner && !this.props.useTitle) {
+      badgeOffset += 15;
+    }
 
     let clipPath = <circle cx={this.props.badgeCircle.cx} cy={this.props.badgeCircle.cy} r={this.props.badgeCircle.r} />;
     if (!this.props.useTitle) {

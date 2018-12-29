@@ -269,6 +269,10 @@ body { font-family: 'Gotham Book'; }
 .SaveButton > .big-button {
   background-color: #0074E4;
 }
+.SaveButton.-disabled > .big-button {
+  background-color: #aaa;
+  color: #ddd;
+}
 
 .DownloadButton > .big-button {
   background-color: #20C063;
@@ -318,6 +322,7 @@ body { font-family: 'Gotham Book'; }
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  overflow-x: auto;
 }
 
 .SaveTile {

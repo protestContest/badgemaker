@@ -18,7 +18,7 @@ class SaveButton extends React.Component {
     let data = (new XMLSerializer()).serializeToString(svg);
 
     const save = {
-      data: that.props.appState.badge,
+      data: that.props.badgeData,
       preview: 'data:image/svg+xml,' + encodeURIComponent(data)
     };
 
@@ -29,8 +29,9 @@ class SaveButton extends React.Component {
   }
 
   render() {
+    const className = (this.props.canSave) ? 'SaveButton' : 'SaveButton -disabled';
     return (
-      <div className='SaveButton'>
+      <div className={className}>
         <button className='big-button' onClick={this.save}>{this.props.children}</button>
       </div>
     );
@@ -38,7 +39,8 @@ class SaveButton extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  appState: state
+  badgeData: state.badge,
+  canSave: state.canSave
 });
 
 const mapDispatchToProps = (dispatch) => ({

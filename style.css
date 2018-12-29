@@ -271,6 +271,11 @@ body { font-family: 'Gotham Book'; }
   font-size: 10px;
   text-decoration: none;
 }
+@media(max-width: 768px) {
+  .feedback {
+    display: none;
+  }
+}
 
 .feedback:hover {
   text-decoration: underline;

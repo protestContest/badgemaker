@@ -58,7 +58,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         badge: newBadgeData,
-        isReset: !badgeIsDefault(newBadgeData),
+        isReset: false,
         canSave: !badgeIsSaved(newBadgeData, state.saves)
       };
 

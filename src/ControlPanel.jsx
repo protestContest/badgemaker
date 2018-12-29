@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setState, reset } from './actions';
+import { setState, reset, closePicker } from './actions';
 import If from './If';
 import SlideControl from './SlideControl';
 import TextControl from './TextControl';
@@ -63,7 +63,7 @@ class ControlPanel extends React.Component {
       : null;
 
     return (
-      <div className="ControlPanel">
+      <div className="ControlPanel" onClick={this.props.closePicker}>
         {/*
         <SlideControl title='Badge Radius' value={this.props.state.badgeRadius} min='0' max='500' onChange={this.setProp('badgeRadius')} />
         <SlideControl title='Petal Radius' value={this.props.state.petalRadius} min='0' max='50' onChange={this.setProp('petalRadius')} />
@@ -126,7 +126,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   set: item => dispatch(setState(item)),
-  reset: () => dispatch(reset())
+  reset: () => dispatch(reset()),
+  closePicker: () => dispatch(closePicker())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ControlPanel);

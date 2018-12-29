@@ -4,6 +4,7 @@ import { openPicker, closePicker } from './actions';
 import { BlockPicker } from 'react-color';
 
 class ColorControl extends React.Component {
+
   constructor(props) {
     super(props);
     this.defaultColors = [
@@ -12,20 +13,30 @@ class ColorControl extends React.Component {
     ];
     this.onChange = this.onChange.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.cancelEvent = this.cancelEvent.bind(this);
   }
 
   onChange(color, event) {
-    event.target.value = color.hex;
-    this.props.close();
+    if (!event.target.value) {
+      event.target.value = color.hex;
+    }
+
+    // this.props.close();
     this.props.onChange(event);
   }
 
-  toggle() {
+  toggle(event) {
     if (this.props.isOpen) {
       this.props.close();
     } else {
       this.props.open();
     }
+
+    event.stopPropagation();
+  }
+
+  cancelEvent(event) {
+    event.stopPropagation();
   }
 
   render() {
@@ -34,7 +45,7 @@ class ColorControl extends React.Component {
     const colors = [...this.defaultColors, ...this.props.customColors];
 
     const picker = (this.props.isOpen)
-      ? <div className='picker'><BlockPicker color={this.props.value} colors={colors} onChange={this.onChange} triangle='hide' /></div>
+      ? <div className='picker' onClick={this.cancelEvent}><BlockPicker color={this.props.value} colors={colors} onChange={this.onChange} triangle='hide' /></div>
       : null;
 
     return (

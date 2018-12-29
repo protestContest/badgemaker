@@ -46,7 +46,7 @@ class Canvas extends React.Component {
       : null;
 
     let title = (this.props.useTitleRing)
-      ? <TitleRing text={this.props.titleText} badgeCircle={badgeCircle} width={this.props.titleWidth} bgColor={this.props.titleColor} textColor='white' />
+      ? <TitleRing text={this.props.titleText} fontSize={this.props.titleFontSize} badgeCircle={badgeCircle} width={this.props.titleWidth} bgColor={this.props.titleColor} textColor='white' />
       : null;
 
     let banner = (this.props.useBanner)

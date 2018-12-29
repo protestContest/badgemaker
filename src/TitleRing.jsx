@@ -43,7 +43,8 @@ export default class TitleRing extends React.Component {
   }
 
   textArc(r) {
-    let d = this.describeArc(this.props.badgeCircle.cx, this.props.badgeCircle.cy, r-6, -Math.PI/2, 1.9*Math.PI, 1).join(' ');
+
+    let d = this.describeArc(this.props.badgeCircle.cx, this.props.badgeCircle.cy, r-8, -Math.PI/2, 1.9*Math.PI, 1).join(' ');
     return <path id='textArc' fill='none' stroke='none' d={d} />;
   }
 
@@ -58,7 +59,7 @@ export default class TitleRing extends React.Component {
   calculateTextLength(text) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     var textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    textEl.setAttribute('style', 'font-family: "Gotham Medium"');
+    textEl.setAttribute('style', `font-family: "Gotham Medium"; font-size: ${this.props.fontSize}px;`);
     svg.appendChild(textEl);
     document.body.appendChild(svg);
 
@@ -79,17 +80,17 @@ export default class TitleRing extends React.Component {
   }
 
   render() {
-    let r = this.props.badgeCircle.r - this.props.width/3;
+    let r = this.props.badgeCircle.r - 0.4*this.props.width;
     let textArc = this.textArc(r);
     let bgArc = this.bgArc(r);
     let lowerArc = this.lowerArc(r);
     let textEl = (
-      <text ref={this.textRef} fill={this.props.textColor}>
+      <text ref={this.textRef} fill={this.props.textColor} fontSize={this.props.fontSize}>
         <textPath startOffset="50%" textAnchor="middle" xlinkHref="#textArc">{this.props.text}</textPath>
       </text>
     );
 
-    let star = <Star cx={this.props.badgeCircle.cx} cy={this.props.badgeCircle.cy + r} size={6} color={this.props.textColor} />;
+    let star = <Star cx={this.props.badgeCircle.cx} cy={this.props.badgeCircle.cy + r} size={8} color={this.props.textColor} />;
 
     return (
       <g>

@@ -17,8 +17,9 @@ const defaultState = {
 
     useTitleRing: true,
     titleColor: '#0074e4',
-    titleWidth: 30,
+    titleWidth: 35,
     titleText: 'BADGE TITLE',
+    titleFontSize: 22,
 
     useBanner: true,
     bannerColor: '#20C063',

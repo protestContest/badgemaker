@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as Vibrant from 'node-vibrant';
 import { setState, reset } from './actions';
 import If from './If';
 import SlideControl from './SlideControl';
@@ -14,7 +13,7 @@ class ControlPanel extends React.Component {
   constructor(props) {
     super(props);
     this.setProp = this.setProp.bind(this);
-    this.fileInput = this.fileInput.bind(this);
+    this.onImageChange = this.onImageChange.bind(this);
     this.removeImage = this.removeImage.bind(this);
     this.reset = this.reset.bind(this);
   }
@@ -32,34 +31,12 @@ class ControlPanel extends React.Component {
     return f;
   }
 
-  fileInput(e) {
-    let that = this;
-    if (e.target.files && e.target.files[0]) {
-      let reader = new FileReader();
-      reader.onload = e => {
-        let image = new Image();
-        image.onload = () => {
-          Vibrant.from(image).getPalette().then(palette => {
-            let customColors = ['Vibrant', 'DarkVibrant', 'LightVibrant', 'Muted', 'DarkMuted', 'LightMuted']
-              .map(prop => palette[prop]).filter(swatch => swatch !== null)
-              .map(swatch => swatch.getHex());
-            if (customColors.length > 5) {
-              customColors = customColors.slice(0, 5);
-            }
-
-            that.props.set({
-              image: e.target.result,
-              imagePosition: { x: 0, y: 0 },
-              imageSize: 100,
-              customColors
-            });
-          });
-        };
-        image.src = e.target.result;
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    }
+  onImageChange(imageProps) {
+    this.props.set({
+      ...imageProps,
+      imagePosition: { x: 0, y: 0 },
+      imageSize: 100
+    });
   }
 
   removeImage(event) {
@@ -134,7 +111,7 @@ class ControlPanel extends React.Component {
           <If true={this.props.state.image}>
             <SlideControl title='Image Size' value={this.props.state.imageSize} min='0' max='300' showValue={false} onChange={this.setProp('imageSize')} />
           </If>
-          <ImageControl title='Image File' value={this.props.state.image} onChange={this.fileInput} />
+          <ImageControl title='Image File' value={this.props.state.image} onChange={this.onImageChange} />
         </div>
 
         <DownloadButton title={this.props.state.titleText} size='500'>Download</DownloadButton>

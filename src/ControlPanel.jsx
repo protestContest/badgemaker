@@ -36,7 +36,10 @@ class ControlPanel extends React.Component {
     if (e.target.files && e.target.files[0]) {
       let reader = new FileReader();
       reader.onload = e => {
-        that.props.set({ image: e.target.result });
+        that.props.set({
+          image: e.target.result,
+          imagePosition: { x: 0, y: 0 }
+        });
       };
 
       reader.readAsDataURL(e.target.files[0]);
@@ -44,7 +47,10 @@ class ControlPanel extends React.Component {
   }
 
   removeImage(event) {
-    this.props.set({ image: null });
+    this.props.set({
+      image: null,
+      imagePosition: { x: 0, y: 0 }
+    });
     event.preventDefault();
   }
 

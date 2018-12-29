@@ -12,5 +12,9 @@ export function closePicker() {
 
 export function reset() {
   localStorage.clear();
-  return {type: 'RESET' };
+  return { type: 'RESET' };
+}
+
+export function adjustImage(newPosition) {
+  return { type: 'ADJUST_IMAGE', payload: newPosition };
 }

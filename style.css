@@ -273,3 +273,11 @@ body { font-family: 'Gotham Book'; }
   text-decoration: underline;
   color: white;
 }
+
+.BadgeImage {
+  cursor: grab;
+  user-select: none;
+}
+.BadgeImage.-dragging {
+  cursor: grabbing;
+}

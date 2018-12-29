@@ -13,7 +13,7 @@ export default class App extends React.Component {
       <div className="App">
         <Canvas />
         <ControlPanel />
-        <a class='feedback' href='mailto:zackm@zillowgroup.com?subject=Badgemaker%20Feedback'>FEEDBACK</a>
+        <a className='feedback' href='mailto:zackm@zillowgroup.com?subject=Badgemaker%20Feedback'>FEEDBACK</a>
       </div>
     );
   }

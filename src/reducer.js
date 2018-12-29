@@ -24,6 +24,7 @@ const defaultState = {
 
   image: null,
   imageSize: 100,
+  imagePosition: { x: 0, y: 0 },
 
   ui: {
     openPicker: null
@@ -63,6 +64,13 @@ export default (state = defaultState, action) => {
           ...state.ui,
           openPicker: null
         }
+      };
+      break;
+
+    case 'ADJUST_IMAGE':
+      return {
+        ...state,
+        imagePosition: action.payload
       };
       break;
 

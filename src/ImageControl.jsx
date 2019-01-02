@@ -55,9 +55,10 @@ export default class ImageControl extends React.Component {
       : null;
 
     return (
-      <label className='ImageControl'>{this.props.title}
+      <label className='ImageControl'>
         <div className='input'>
           <div>
+            <div className='title'>{this.props.title}</div>
             <input ref={this.fileInput} type='file' {...restProps} onChange={this.onChange} />
           </div>
           {preview}

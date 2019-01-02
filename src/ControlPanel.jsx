@@ -109,10 +109,10 @@ class ControlPanel extends React.Component {
             Image
             {imageReset}
           </div>
+          <ImageControl title='Image File' value={this.props.badge.image} onChange={this.onImageChange} />
           <If true={this.props.badge.image}>
             <SlideControl title='Image Size' value={this.props.badge.imageSize} min='0' max='300' showValue={false} onChange={this.setProp('imageSize')} />
           </If>
-          <ImageControl title='Image File' value={this.props.badge.image} onChange={this.onImageChange} />
         </div>
 
         <div className='actions'>

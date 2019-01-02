@@ -207,6 +207,7 @@ body { font-family: 'Gotham Book'; }
   position: relative;
   cursor: pointer;
   margin: 0px;
+  outline: none;
 }
 .ToggleControl > .input > input[type='checkbox']::after {
   content: '';
@@ -222,9 +223,6 @@ body { font-family: 'Gotham Book'; }
 }
 .ToggleControl > .input > input[type='checkbox'][checked]::after {
   left: 17px;
-}
-.ToggleControl > .input > input[type='checkbox']::active {
-  outline: none;
 }
 
 .ColorControl {

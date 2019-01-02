@@ -147,6 +147,8 @@ body { font-family: 'Gotham Book'; }
   width: 140px;
   padding: 0px;
   text-transform: uppercase;
+  font-family: 'Gotham Medium';
+  font-size: 14px;
 }
 
 .ImageControl {

@@ -45,9 +45,8 @@ export default class DownloadButton extends React.Component {
     img.onload = function () {
       ctx.drawImage(img, 0, 0);
 
-      let imgURI = canvas
-          .toDataURL('image/png')
-          .replace('image/png', 'image/octet-stream');
+      let imgURI = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+      imgURI = that.addMetadata(imgURI);
 
       that.triggerDownload(imgURI);
 
@@ -56,6 +55,18 @@ export default class DownloadButton extends React.Component {
     };
 
     img.src = 'data:image/svg+xml,' + encodeURIComponent(data);
+  }
+
+  addMetadata(imgURI) {
+    // inserts "Software" metadata into badge image
+    const tEXt = atob('AAAAMnRFWHRTb2Z0d2FyZQBCYWRnZW1ha2VyIDEuMSA8aHR0cDovL2JhZGdlbWFrZXIuemptLm1lPooScKQ=');
+
+    const byteStr = atob(imgURI.slice(31));
+    const header = byteStr.slice(0, 33);
+    const imgData = byteStr.slice(33);
+    const newByteStr = header + tEXt + imgData;
+
+    return 'data:image/octet-stream;base64,' + btoa(newByteStr);
   }
 
   render() {

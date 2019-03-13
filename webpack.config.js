@@ -5,7 +5,7 @@ let CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   entry: './src/entry.js',
   output: {
-    filename: 'app.js'
+    filename: 'dist/app.js'
   },
   mode: 'development',
   module: {

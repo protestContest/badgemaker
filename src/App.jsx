@@ -23,7 +23,7 @@ class App extends React.Component {
     return (
       <div className="App" onClick={this.onAppClick}>
         <Canvas />
-        {/*<SaveList />*/}
+        <SaveList />
         <ControlPanel />
         <a className='feedback' href='mailto:zackm@zillowgroup.com?subject=Badgemaker%20Feedback'>FEEDBACK</a>
       </div>
